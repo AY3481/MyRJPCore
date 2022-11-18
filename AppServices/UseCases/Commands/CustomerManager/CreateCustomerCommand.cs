@@ -34,8 +34,6 @@ namespace Application.UseCases.Commands.CustomerManager
                 _context.Customers.Add(customer);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var x = _mapper.Map<CustomerResponseModel>(customer);
-
                 return customer.Id;
             }
         }

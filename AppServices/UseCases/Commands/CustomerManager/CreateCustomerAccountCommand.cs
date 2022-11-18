@@ -39,7 +39,6 @@ namespace Application.UseCases.Commands.CustomerManager
 
                 var account = customer.AddAccount(initialCredit);
                 
-                //_context.Customers.Add(customer);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return account.Id;
