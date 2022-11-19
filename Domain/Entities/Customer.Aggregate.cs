@@ -20,13 +20,6 @@ namespace Domain.Entities
             
             this.Accounts.Add(oAccount);
 
-            //var addEvent = new OnPayslipAddedDomainEvent()
-            //{
-            //    Payslip = payslip
-            //};
-
-            //AddEvent(addEvent);
-
             return oAccount;
         }
     }

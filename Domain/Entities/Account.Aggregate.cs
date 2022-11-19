@@ -15,13 +15,6 @@ namespace Domain.Entities
 
             this.Transactions.Add(oTransaction);
 
-            //var addEvent = new OnPayslipAddedDomainEvent()
-            //{
-            //    Payslip = payslip
-            //};
-
-            //AddEvent(addEvent);
-
             return oTransaction;
         }
     }
