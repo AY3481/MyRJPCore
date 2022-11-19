@@ -13,11 +13,8 @@ namespace Application.UseCases.Queries
 {
     public class GetCustomerTransactionsQuery : IRequest<List<CustomerTransactionsResponseModel>>
     {
-        public long CustomerID { get; }
-
-        public GetCustomerTransactionsQuery(long customerId)
+        public GetCustomerTransactionsQuery()
         {
-            CustomerID = customerId;
         }
 
         public class GetCustomerTransactionsQueryHandler : IRequestHandler<GetCustomerTransactionsQuery, List<CustomerTransactionsResponseModel>>
@@ -33,10 +30,8 @@ namespace Application.UseCases.Queries
 
             public async Task<List<CustomerTransactionsResponseModel>> Handle(GetCustomerTransactionsQuery request, CancellationToken cancellationToken)
             {
-                var customerId = request.CustomerID;
                 var CustomerTransactions = await _context.Customers
                     .Include(x => x.Accounts).ThenInclude(y => y.Transactions)
-                    //.Where(x => x.Id == customerId)
                     .Select(o => new CustomerTransactionsResponseModel()
                     {
                         Id = o.Id,
@@ -46,7 +41,6 @@ namespace Application.UseCases.Queries
                         Transactions = _mapper.Map<List<TransactionResponseModel>>(o.Accounts.SelectMany(s => s.Transactions).ToList())
                     })
                     .ToListAsync();
-                    //.FirstOrDefaultAsync();
 
                 return CustomerTransactions;
             }
